@@ -4,14 +4,14 @@ import './App.css'
 
 function App() {
   const [users, setUsers] = useState(null);
-  const [table, setTable] = useState(null);
+  //const [table, setTable] = useState(null);
   const [search, setSearch] = useState("");
 
   const getUrl = async () => {
     await fetch("https://dev-api.focalpoint.nearshoretc.com/project")
       .then((response) => response.json())      
       .then((response) => setUsers(response))
-      .then((response) => setTable(response))
+      //.then((response) => setTable(response))
       //.then((response) => console.log(response))
       // .then((search) => setSearch(search));
       .catch((error) => console.error(error));
@@ -26,9 +26,8 @@ function App() {
 
   const filterSearch = (res) => {
     
-    // problema : setTable.filter is not a function
-    let resultSearch = setTable.filter((e) => { //Array.from(setTable)?
-      if (e.project_name.toString().toLowerCase().includes(res.toLowercase())){
+    let resultSearch = users.filter((e) => { 
+      if (e.project_name.toString().toLowerCase().includes(res.toLowerCase())){
         return e;
       }        
     });
