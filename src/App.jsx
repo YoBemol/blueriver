@@ -1,34 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
+import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [users, setUsers] = useState(null);
+  //const [table, setTable] = useState(null);
+  const [search, setSearch] = useState("");
+
+  const getUrl = async () => {
+    await fetch("https://dev-api.focalpoint.nearshoretc.com/project")
+      .then((response) => response.json())      
+      .then((response) => setUsers(response))
+      //.then((response) => setTable(response))
+      //.then((response) => console.log(response))
+      // .then((search) => setSearch(search));
+      .catch((error) => console.error(error));
+
+  }
+
+  const handleOnChange = (e) => {
+    //console.log(e.target.value)
+    setSearch(e.target.value)    
+    filterSearch(e.target.value)
+  }
+
+  const filterSearch = (res) => {
+    
+    let resultSearch = users.filter((e) => { 
+      if (e.project_name.toString().toLowerCase().includes(res.toLowerCase())){
+        return e;
+      }        
+    });
+    setUsers(resultSearch)
+  }
+
+  useEffect(() => {
+    getUrl()
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
+    <div className='app'>
+      <div className='containerInput'>
+        <input
+          className='form-control inputSearch'
+          value={search}
+          placeholder='Busqueda por proyecto'
+          onChange={handleOnChange}
+        />
+        <button className='btn btn-success'>Ir</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className='table-responsive'>
+        <table className='table table-sm table-bordered'>
+          <thead>
+            <tr>
+              <th>Project Name</th>
+              <th>Project Owner</th>
+              <th>Project Manager</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {users && users.map((user) => (
+              <tr key={user.id}>
+                <td>{user.project_name}</td>
+                <td>{user.project_owner}</td>
+                <td>{user.project_manager}</td>
+                <td>{user.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
+
   )
 }
 
