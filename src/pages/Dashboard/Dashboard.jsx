@@ -4,6 +4,7 @@ import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import "./dashboard.css";
 import Search from "../../components/Search";
+import InfoProject from './components/InfoProject';
 
 const Phases = [
   {
@@ -199,7 +200,7 @@ function Dashboard() {
           <Search/>
         </section>
         <section>
-
+          <InfoProject/>
         </section>
         <section className="phasesContainer">
           {Phases.map((phase, index) => {
