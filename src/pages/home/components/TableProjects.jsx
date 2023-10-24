@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
+
 function TableProjects({ users }) {
+  
     return (
       <div className='table-responsive'>
         <table className='table table-sm table-bordered'>
@@ -11,8 +13,8 @@ function TableProjects({ users }) {
               <th>Status</th>
             </tr>
           </thead>
-  
-          <tbody>
+          
+          <tbody>            
             {users && users.map((user) => (
               <tr key={user.id}>
                 <td>{user.project_name}</td>
