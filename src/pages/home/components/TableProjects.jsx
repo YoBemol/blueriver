@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './tableProjects.css'
 function TableProjects({ users }) {
     return (
-      <div className='table-responsive'>
-        <table className='table table-sm table-bordered'>
+        <table className='table-projects'>
           <thead>
             <tr>
               <th>Project Name</th>
@@ -26,13 +25,6 @@ function TableProjects({ users }) {
             ))}
           </tbody>
         </table>
-      </div>
     );
   }
-
-TableProjects.propTypes = {
-    users: PropTypes.array
-  };
-  
-
   export default TableProjects
