@@ -1,0 +1,18 @@
+.tab {
+    background-color: white;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    border: none;
+    color: #3E74FF;
+    font-size: 24px;
+    font-weight: 500;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+
+}
+
+.active {
+    background-color: #3E74FF;
+    color: white;
+}
+
