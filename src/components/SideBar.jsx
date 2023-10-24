@@ -21,10 +21,10 @@ function SideBar() {
             {isActive('/') && <MdKeyboardArrowRight className='icon-active'/>}
           </li>
           
-          <li className={`${isActive('/dashboard')}`} >
+          <li className={`${isActive('/dashboard/:id')}`} >
             <BiFileBlank className='icon-aside' />
-            <Link className='link-navigation ' to='/dashboard'>Overview</Link>
-            {isActive('/dashboard') && <MdKeyboardArrowRight className='icon-active'/>}
+            <Link className='link-navigation ' to='/dashboard/:id'>Overview</Link>
+            {isActive('/dashboard/:id') && <MdKeyboardArrowRight className='icon-active'/>}
           </li>
         </ul>
     </aside>
