@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 function TableProjects({ users }) {
     return (
       <div className='table-responsive'>
@@ -15,10 +16,12 @@ function TableProjects({ users }) {
           <tbody>
             {users && users.map((user) => (
               <tr key={user.id}>
+                <Link to={`/dashboard/${user.id}`}>
                 <td>{user.project_name}</td>
                 <td>{user.project_owner}</td>
                 <td>{user.project_manager}</td>
                 <td>{user.status}</td>
+                </Link>
               </tr>
             ))}
           </tbody>
