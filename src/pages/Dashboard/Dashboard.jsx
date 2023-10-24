@@ -1,4 +1,4 @@
-import SideBar from "./components/SideBar"
+import SideBar from "../../components/SideBar"
 function Dashboard() {
   return (
     <div>
