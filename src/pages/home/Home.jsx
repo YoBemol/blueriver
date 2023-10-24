@@ -1,4 +1,4 @@
-import Search from './components/Search';
+import SearchTable from './components/SearchTable';
 import SideBar from '../../components/SideBar';
 import './home.css'
 function Home() {
@@ -6,7 +6,7 @@ function Home() {
   return (
     <div className='home'>
       <SideBar/>
-      <Search/>
+      <SearchTable/>
     </div>
   )
 }
