@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import TableProjects from './TableProjects';
-import SearchBar from '../../../components/SearchBar';
+import SearchBar from '../../../components/Search';
 
 
-function Search() {
+function SearchTable() {
   const [users, setUsers] = useState(null);
   const [filteredUsers, setFilteredUsers] = useState(null);
 
@@ -29,10 +29,10 @@ function Search() {
   }, []);
 
   return (
-    <div className='app'>
+    <div className='search'>
       <SearchBar onSearch={handleSearch} />
       <TableProjects users={filteredUsers} />
     </div>
   );
 }
-export default Search
+export default SearchTable

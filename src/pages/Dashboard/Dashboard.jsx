@@ -3,7 +3,7 @@ import SideBar from "../../components/SideBar";
 import Tabs from "../../components/Tabs";
 import Table from "../../components/Table";
 import "./dashboard.css";
-import SearchBar from "../../components/SearchBar";
+import Search from "../../components/Search";
 
 const Phases = [
   {
@@ -196,10 +196,10 @@ function Dashboard() {
       </div>
       <div className="rigthSection">
         <section>
-          <SearchBar/>
+          <Search/>
         </section>
         <section>
-          
+
         </section>
         <section className="phasesContainer">
           {Phases.map((phase, index) => {
