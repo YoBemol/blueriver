@@ -18,13 +18,13 @@ function SideBar() {
           <li className={`${isActive('/')}`}>
             <BiHomeAlt className='icon-aside'/>
             <Link className='link-navigation' to='/'>Projects</Link>
-            {isActive('/') && <MdKeyboardArrowRight/>}
+            {isActive('/') && <MdKeyboardArrowRight className='icon-active'/>}
           </li>
           
-          <li className={`${isActive('/dashboard')}`} >
+          <li className={`${isActive('/dashboard/:id')}`} >
             <BiFileBlank className='icon-aside' />
-            <Link className='link-navigation ' to='/dashboard'>Overview</Link>
-            {isActive('/dashboard') && <MdKeyboardArrowRight/>}
+            <Link className='link-navigation ' to='/dashboard/:id'>Overview</Link>
+            {isActive('/dashboard/:id') && <MdKeyboardArrowRight className='icon-active'/>}
           </li>
         </ul>
     </aside>
