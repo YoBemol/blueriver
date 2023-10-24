@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function SearchBar({ onSearch }) {
+function Search({ onSearch }) {
   const [search, setSearch] = useState("");
 
   const handleOnChange = (e) => {
@@ -21,8 +21,8 @@ function SearchBar({ onSearch }) {
     </div>
   );
 }
-SearchBar.propTypes = {
+Search.propTypes = {
     onSearch: PropTypes.func
   };
 
-export default SearchBar;
+export default Search;
