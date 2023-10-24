@@ -1,0 +1,10 @@
+
+.link-navigation {
+    color: black;
+    text-decoration: none;
+    display: block; 
+}
+.logo-nav{
+    height: 2vh;
+    margin-right: 1vh;
+}
