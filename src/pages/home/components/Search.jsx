@@ -29,7 +29,7 @@ function Search() {
   }, []);
 
   return (
-    <div className='app'>
+    <div className='search'>
       <SearchBar onSearch={handleSearch} />
       <TableProjects users={filteredUsers} />
     </div>
