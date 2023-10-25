@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 function InfoProject() {
   const { id } = useParams();
-  // const [status, setStatus] = useState('Not Started')
 
   const options = [
     { label: 'Not Started', value: 'Not Started' },
@@ -27,11 +26,12 @@ function InfoProject() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(project),
+      body: JSON.stringify(project)
     })
       .then((response) => response.json())
       .then((data) => {
         console.log('Actualizada----------:', data);
+        console.log('***************', project.status)
       })
       .catch((error) => console.error(error));
   };
@@ -58,7 +58,7 @@ function InfoProject() {
               <h4>Status</h4>
               <select className='form-select' onChange={handleSelect}>
                 {options.map((option, index) => (
-                  <option selected={options.value === project.status} value={option.value} key={index}>{option.label}</option>
+                  <option selected={option.value === project.status} value={option.value} key={index}>{option.label}</option>
                 ))}
               </select>
               <p>{project.status}</p>
