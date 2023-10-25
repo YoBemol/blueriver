@@ -189,37 +189,38 @@ function Dashboard() {
   };
 
   return (
-    <div className="layout">
-      <div className="leftSection">
-        <div className="dashboardContainer">
-          <SideBar />
+    <div>
+      <Modal></Modal>
+      <div className="layout">
+        <div className="leftSection">
+          <div className="dashboardContainer">
+            <SideBar />
+          </div>
         </div>
-      </div>
-      <div className="rigthSection">
-        <section>
-          <Search/>
-        </section>
-        <section>
-          <Modal></Modal>
-        </section>
-        <section className="phasesContainer">
-          {Phases.map((phase, index) => {
-            return (
-              <Tabs
-                key={index}
-                name={phase.name}
-                active={index === activePhase}
-                handleClick={() => handlePhaseClick(index)}
-              />
-            );
-          })}
-        </section>
-        <section style={{ width: "50%" }}>
-          <Table
-            headers={["Description", "Planned Date", "Current Date"]}
-            data={tableData[activePhase]}
-          ></Table>
-        </section>
+        <div className="rigthSection">
+          <section>
+            <Search />
+          </section>
+          <section></section>
+          <section className="phasesContainer">
+            {Phases.map((phase, index) => {
+              return (
+                <Tabs
+                  key={index}
+                  name={phase.name}
+                  active={index === activePhase}
+                  handleClick={() => handlePhaseClick(index)}
+                />
+              );
+            })}
+          </section>
+          <section style={{ width: "50%" }}>
+            <Table
+              headers={["Description", "Planned Date", "Current Date"]}
+              data={tableData[activePhase]}
+            ></Table>
+          </section>
+        </div>
       </div>
     </div>
   );
