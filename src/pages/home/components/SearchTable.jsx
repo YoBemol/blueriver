@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import TableProjects from './TableProjects';
-import SearchBar from '../../../components/Search';
-import Pagination from './paginacion';
+import Search from '../../../components/Search';
+import SortButton from './SortButton';
+import Pagination from './Pagination';
+
+
 
 function SearchTable() {
   const [users, setUsers] = useState(null);
@@ -10,12 +13,13 @@ function SearchTable() {
   const projectsPerPage = 10;
 
 
+  const [ordenAZ, setOrdenAZ] = useState(true);
   const getUrl = async () => {
     await fetch("https://dev-api.focalpoint.nearshoretc.com/project")
       .then((response) => response.json())
       .then((response) => {
         setUsers(response);
-        setFilteredUsers(response);
+        setFilteredUsers([...response]);
       })
       .catch((error) => console.error(error));
   }
@@ -36,10 +40,24 @@ function SearchTable() {
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = filteredUsers?.slice(indexOfFirstProject, indexOfLastProject);
 
+  const tableSort = () => {
+    const ordered = [...filteredUsers];  
+      ordered.sort((a, b) => {
+        if (ordenAZ) {
+            return a.project_name.localeCompare(b.project_name); 
+        } else {
+        return b.project_name.localeCompare(a.project_name); 
+        }
+      });
+      setFilteredUsers(ordered);
+      setOrdenAZ(!ordenAZ); 
+      };
+
   return (
     <div className='search'>
-      <SearchBar onSearch={handleSearch} />
+      <Search onSearch={handleSearch} />
       <TableProjects users={currentProjects} />
+      <SortButton ordenAZ={ordenAZ} onClick={tableSort} />
       {filteredUsers && (
         <Pagination
           currentPage={currentPage}
@@ -47,7 +65,7 @@ function SearchTable() {
           onPageChange={setCurrentPage}
         />
       )}
-    </div>
-  );
+    </div> 
+  )
 }
 export default SearchTable
