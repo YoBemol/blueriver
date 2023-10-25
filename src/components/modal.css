@@ -1,0 +1,24 @@
+.modalContainer {
+    background: rgb(0, 0, 0, 0.5);
+    width: 100%;
+    height: 50%;
+}
+
+.modalContent {
+    background-color: white;
+    width: 50%;
+}
+
+.modalInput {
+    padding: 0.1rem;
+    border-radius: 5px;
+}
+
+.closeModal {
+    position: absolute;
+    top: 1rem;
+    right: 7.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #1b444c;
+  }
