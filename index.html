@@ -7,6 +7,18 @@
     <title>Vite + React</title>
   </head>
   <body>
+    <script type="module">
+      import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+      Chatbot.init({
+          chatflowid: "a8345056-4918-45a2-ac8b-cbefa5816fa4",
+          apiHost: "https://blueriver-tf.onrender.com",
+          theme: {
+            button: {
+              backgroundColor: "#3E74FF"
+            }
+          }
+      })
+  </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
