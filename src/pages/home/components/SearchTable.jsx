@@ -1,20 +1,25 @@
 import { useState, useEffect } from 'react'
 import TableProjects from './TableProjects';
 import SearchBar from '../../../components/Search';
-
+import { Spinner } from 'reactstrap';
 
 function SearchTable() {
   const [users, setUsers] = useState(null);
   const [filteredUsers, setFilteredUsers] = useState(null);
+  const [ loading, setLoading ] = useState(true);
 
   const getUrl = async () => {
+    setLoading(true);
     await fetch("https://dev-api.focalpoint.nearshoretc.com/project")
       .then((response) => response.json())
       .then((response) => {
         setUsers(response);
         setFilteredUsers(response);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error(error))
+      .finally(() => {
+        setLoading(false); 
+      });
   }
 
   const handleSearch = (query) => {
@@ -31,7 +36,7 @@ function SearchTable() {
   return (
     <div className='search'>
       <SearchBar onSearch={handleSearch} />
-      <TableProjects users={filteredUsers} />
+      {loading?<Spinner />:<TableProjects users={filteredUsers} />}
     </div>
   );
 }
