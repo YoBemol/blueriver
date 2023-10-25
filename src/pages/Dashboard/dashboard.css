@@ -1,33 +1,68 @@
 .layout {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .leftSection {
-    display: flex;
-    width: 25%;
-    height: 100vh;
-}
-
-.rightSection{
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-    height: 100vh;
-
+  display: flex;
+  width: 25%;
+  height: 100vh;
 }
 
 .dashboardContainer {
-    background-color: #F6F8FD;
+    background-color: white;
     width: 100%;
     height: 100vh;
+  }
+  
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  height: max-content;
+  overflow: scroll;
+  padding-left: 2rem;
 }
 
+.searchSection {
+  height: 7vh;
+  background-color: white;
+}
+
+.informationCharged {
+  height: 50vh;
+}
 
 .phasesContainer {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
+
+.tab {
+  padding: 8px 20px 8px 20px;
+  width: 150px;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 3px;
+  text-align: center;
+  vertical-align: super;
+  line-height: 1.5;
+}
+
+.tablesContainer {
+  display: flex;
+  flex-direction: column;
+  height: 33vh;
+}
+
+.leftTable {
+  width: 60%;
+}
+
+.rightTable {
+  width: 40%;
 }
