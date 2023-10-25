@@ -1,6 +1,6 @@
 import "./table.css";
 
-const Table = ({ headers, data }) => {
+const Table = ({ headers, data, handleClick }) => {
   const { title, items } = data;
   return (
     <div className="tableContainer">
@@ -13,7 +13,7 @@ const Table = ({ headers, data }) => {
       <div className="itemsContainer">
         {items.map((item, index) => {
           return (
-            <div key={index} className="item">
+            <div key={index} className="item" onClick={() => handleClick(item)}>
               <p>{item.description}</p>
               <p>{item.plannedDate}</p>
               <p>{item.currentDate}</p>

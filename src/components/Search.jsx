@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-
+import './search.css'
 function Search({ onSearch }) {
   const [search, setSearch] = useState("");
 
@@ -10,19 +9,16 @@ function Search({ onSearch }) {
   }
 
   return (
-    <div className='containerInput'>
+    <div className='search-projects'>
+
       <input
-        className='form-control inputSearch'
+        className='inputSearch'
         value={search}
-        placeholder='Busqueda por proyecto'
+        placeholder='Search project'
         onChange={handleOnChange}
       />
-      <button className='btn btn-success'>Ir</button>
     </div>
   );
 }
-Search.propTypes = {
-    onSearch: PropTypes.func
-  };
 
 export default Search;

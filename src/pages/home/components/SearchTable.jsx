@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import TableProjects from './TableProjects';
-import SearchBar from '../../../components/Search';
+import Search from '../../../components/Search';
+
 
 
 function SearchTable() {
@@ -30,7 +31,7 @@ function SearchTable() {
 
   return (
     <div className='search'>
-      <SearchBar onSearch={handleSearch} />
+      <Search onSearch={handleSearch} />
       <TableProjects users={filteredUsers} />
     </div>
   );
