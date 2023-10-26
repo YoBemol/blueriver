@@ -1,30 +1,33 @@
-import { Link } from 'react-router-dom';
-import './tableProjects.css'
+import './tableProjects.css';
+import {AiTwotoneExclamationCircle } from "react-icons/ai";
+
+
 function TableProjects({ users }) {
-    return (
-        <table className='table-projects'>
-          <thead>
-            <tr>
-              <th>Project Name</th>
-              <th>Project Owner</th>
-              <th>Project Manager</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-  
-          <tbody>
-            {users && users.map((user) => (
-              <tr key={user.id}>
-                <Link to={`/dashboard/${user.id}`}>
-                <td>{user.project_name}</td>
-                <td>{user.project_owner}</td>
-                <td>{user.project_manager}</td>
-                <td>{user.status}</td>
-                </Link>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-    );
-  }
-  export default TableProjects
+  const handleClick = (userId) => {
+    window.location.href = `/dashboard/${userId}`;
+  };
+
+  return (
+    <div className='table-projects'>
+      <div className='table-header'>
+        <div className='header-cell'>Project Name</div>
+        <div className='header-cell'>Project Owner</div>
+        <div className='header-cell'>Project Manager</div>
+        <div className='header-cell'>Status</div>
+      </div>
+
+      <div className='table-body'>
+        {users && users.map((user) => (
+          <div key={user.id} className='table-row' onClick={() => handleClick(user.id)}>
+            <div className='cell cell-name'>{user.project_name}</div>
+            <div className='cell cell-OM'>{user.project_owner}</div>
+            <div className='cell cell-OM'>{user.project_manager}</div>
+            <div className='cell cell-status'><AiTwotoneExclamationCircle className='icon-status'/>{user.status}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default TableProjects;

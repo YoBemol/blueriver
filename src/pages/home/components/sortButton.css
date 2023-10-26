@@ -1,0 +1,29 @@
+.container-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vh 5vh 2vh 5vh;
+  }
+  
+  .container-projects {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .icono-projects{
+    margin-right: 1vh;
+  }
+  
+
+.button-sort {
+  background: #F6F8FD;
+  border: 1px solid #F6F8FD;
+  font-size: 16px;
+  color: rgba(168, 168, 168, 1);
+  font-weight: 500;
+}
+.button-sort:hover{
+    cursor: pointer; 
+}
