@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     padding-top: 2vh;
+    background-color: rgba(255, 255, 255, 1);
 }
 /*************** Lista *******************/
 li{
@@ -26,6 +27,8 @@ li{
 .container-link{
     margin-top: 10vh;
     list-style: none;
+    width: 210px;
+
 }
 
 /********* Logos del nav ******************/
@@ -39,6 +42,7 @@ li{
 /*logo principal*/
 #logo-blueriver{
     width: 240px;
+    margin: 1vh;
 }
 
 /****************Logo y link****************/

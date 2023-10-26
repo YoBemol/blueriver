@@ -3,26 +3,11 @@
   flex-direction: row;
 }
 
-.leftSection {
-  display: flex;
-  width: 25%;
-  height: 100vh;
-}
-
 .dashboardContainer {
     background-color: white;
     width: 100%;
     height: 100vh;
   }
-  
-.rightSection {
-  display: flex;
-  flex-direction: column;
-  width: 75%;
-  height: max-content;
-  overflow: scroll;
-  padding-left: 2rem;
-}
 
 .searchSection {
   height: 7vh;

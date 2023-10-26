@@ -56,8 +56,8 @@ function SearchTable() {
   return (
     <div className='search'>
       <Search onSearch={handleSearch} />
-      <TableProjects users={currentProjects} />
       <SortButton ordenAZ={ordenAZ} onClick={tableSort} />
+      <TableProjects users={currentProjects} />
       {filteredUsers && (
         <Pagination
           currentPage={currentPage}
