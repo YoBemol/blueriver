@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //import KeyUpdates from './keyUpdates';
-// import ModalKeyUpdates from './modalKeyUpdates';
+import ModalKeyUpdates from './modalKeyUpdates';
 import ProjectDetails from './ProjectDetails';
 
 function InfoProject() {
@@ -95,6 +95,7 @@ function InfoProject() {
             </div>
           ))}*/}
         {/* <KeyUpdates /> */}
+        <ModalKeyUpdates/>
         <ProjectDetails project={project}/>
         </div>
       ) : (
