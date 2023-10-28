@@ -1,0 +1,21 @@
+
+.icon-status {
+    font-size: 16px; 
+  }
+  
+  .icon-status-green {
+    color: green; 
+  }
+  
+  .icon-status-red {
+    color: rgb(199, 28, 28); 
+  }
+  
+  .icon-status-blue {
+    color: #3E74FF;
+  }
+  
+  .icon-status-gray {
+    color: gray;
+  }
+  
