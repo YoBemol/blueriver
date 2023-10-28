@@ -7,6 +7,8 @@ import ProjectDetails from './ProjectDetails';
 function InfoProject() {
   const { id } = useParams();
 
+const [newDescription, setNewDescription] = useState(null);
+
   const options = [
     { label: 'Not Started', value: 'Not Started' },
     { label: 'On Track', value: 'On Track' },
@@ -59,6 +61,11 @@ function InfoProject() {
     setProject({ ...project, status: event.target.value })
   }
 
+  function handletDescription(description) {
+    setNewDescription(description)
+  }
+
+
   console.log(project)
 
   return (
@@ -95,7 +102,7 @@ function InfoProject() {
             </div>
           ))}*/}
         {/* <KeyUpdates /> */}
-        <ModalKeyUpdates/>
+        <ModalKeyUpdates newDescription={handletDescription}/>
         <ProjectDetails project={project}/>
         </div>
       ) : (
