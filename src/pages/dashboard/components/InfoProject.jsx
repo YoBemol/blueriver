@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //import KeyUpdates from './keyUpdates';
 // import ModalKeyUpdates from './modalKeyUpdates';
-import ProjectDetails from './ProjectDetails';
+// import ProjectDetails from './ProjectDetails';
 
 function InfoProject() {
   const { id } = useParams();
@@ -14,14 +14,18 @@ function InfoProject() {
     { label: 'Done', value: 'Done' },
   ]
 
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState({});
   useEffect(() => {
     fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`)
       .then((response) => response.json())
       .then((data) => setProject(data));
   }, [id]);
 
-
+  const updatedProject = {
+    project_description: project.project_description,
+    project_status: project.status,
+  };
+  
   const addObjetives = () => {
 
     fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`, {
@@ -29,7 +33,7 @@ function InfoProject() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(project)
+      body: JSON.stringify(updatedProject)
     })
       .then((response) => response.json())
       .then((data) => {
@@ -67,7 +71,7 @@ function InfoProject() {
         <div>
           <h2>{project.project_name}</h2>
           <p>Descripción: {project.project_description}</p>
-          <p>key: {project.key_updates.initiation['Highlights & Concerns'][0].key_update_value}</p>
+          
           <input
             type="text"
             value={project.project_description}
@@ -80,7 +84,7 @@ function InfoProject() {
               <h4>Status</h4>
               <select className='form-select' onChange={handleSelect}>
                 {options.map((option, index) => (
-                  <option selected={option.value === project.status} value={option.value} key={index}>{option.label}</option>
+                  <option  value={option.value} key={index}>{option.label}</option>
                 ))}
               </select>
               <p>{project.status}</p>
@@ -95,7 +99,7 @@ function InfoProject() {
             </div>
           ))}*/}
         {/* <KeyUpdates /> */}
-        <ProjectDetails project={project}/>
+        {/* <ProjectDetails project={project}/> */}
         </div>
       ) : (
         <div>Cargando</div>
