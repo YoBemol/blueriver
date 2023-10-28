@@ -14,22 +14,27 @@ function InfoProject() {
     { label: 'Done', value: 'Done' },
   ]
 
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState({});
   useEffect(() => {
     fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`)
       .then((response) => response.json())
       .then((data) => setProject(data));
   }, [id]);
 
+  const updatedProject = {
+    project_description: project.project_description,
+    project_status: project.status,
+  };
 
   const addObjetives = () => {
+
 
     fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(project)
+      body: JSON.stringify(updatedProject)
     })
       .then((response) => response.json())
       .then((data) => {
@@ -74,13 +79,13 @@ function InfoProject() {
             onChange={(e) => setProject({ ...project, project_description: e.target.value })}
           />
 
-          <h1>{id}</h1>
+          {/* <h1>{id}</h1> */}
           <div className='d-flex flex-row-reverse '>
             <div className='w-25 p-3 border rounded'>
               <h4>Status</h4>
               <select className='form-select' onChange={handleSelect}>
                 {options.map((option, index) => (
-                  <option selected={option.value === project.status} value={option.value} key={index}>{option.label}</option>
+                  <option value={option.value} key={index}>{option.label}</option>
                 ))}
               </select>
               <p>{project.status}</p>

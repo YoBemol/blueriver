@@ -1,5 +1,6 @@
 import './tableProjects.css';
 import {AiTwotoneExclamationCircle } from "react-icons/ai";
+import { Spinner } from "reactstrap"
 
 
 function TableProjects({ users }) {
@@ -16,6 +17,7 @@ function TableProjects({ users }) {
         <div className='header-cell'>Status</div>
       </div>
 
+      <div><Spinner /></div>
       <div className='table-body'>
         {users && users.map((user) => (
           <div key={user.id} className='table-row' onClick={() => handleClick(user.id)}>
