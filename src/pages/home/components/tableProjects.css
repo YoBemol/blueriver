@@ -1,8 +1,10 @@
 .table-projects {
     display: flex;
     flex-direction: column;
-    margin-left: 3vh;
+    margin-left: 43vh;
     width: 145vh;
+    top:139px;
+    position: absolute;
   }
   
   .table-header {
@@ -10,6 +12,7 @@
     justify-content: space-between;
     color: rgba(168, 168, 168, 1);
     padding: 10px;
+    width: 1055px;
   }
   
   .table-body {

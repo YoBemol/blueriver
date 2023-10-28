@@ -10,7 +10,7 @@ function SearchTable() {
   const [users, setUsers] = useState(null);
   const [filteredUsers, setFilteredUsers] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const projectsPerPage = 10;
+  const projectsPerPage = 8;
 
 
   const [ordenAZ, setOrdenAZ] = useState(true);

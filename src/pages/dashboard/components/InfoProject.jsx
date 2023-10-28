@@ -7,8 +7,6 @@ import ProjectDetails from './ProjectDetails';
 function InfoProject() {
   const { id } = useParams();
 
-const [newDescription, setNewDescription] = useState(null);
-
   const options = [
     { label: 'Not Started', value: 'Not Started' },
     { label: 'On Track', value: 'On Track' },
