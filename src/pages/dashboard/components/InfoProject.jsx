@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Search from '../../../components/Search';
 //import KeyUpdates from './keyUpdates';
 // import ModalKeyUpdates from './modalKeyUpdates';
 // import ProjectDetails from './ProjectDetails';
@@ -43,22 +44,6 @@ function InfoProject() {
       .catch((error) => console.error(error));
   };
 
-  //******** Agregar Keys  ***********
-  // const handleAddKeys = (newKey) => {
-  //   fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}/phase-key-updates`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(newKey),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setProject(project.concat(data));
-  //     })
-  //     .catch((error) => console.error(error));
-  // };
-
   function handleSelect(event) {
     setProject({ ...project, status: event.target.value })
   }
@@ -67,6 +52,7 @@ function InfoProject() {
 
   return (
     <div>
+       <Search/>
       {project ? (
         <div>
           <h2>{project.project_name}</h2>

@@ -5,7 +5,7 @@
 }
 /********* Contenedor principal ******************/
 .aside, .container-link {
-    width: 100%;
+    width: 20%;
     height: 100vh;
     display: flex;
     flex-direction: column;
