@@ -89,7 +89,7 @@ function InfoProject() {
 
           <div className="container-project-name d-flex justify-content-between align-items-center">
             <p className='title-info'>{project.project_name}</p>
-            <SelectStatus options={options} selectedStatus={project.status} onChange={handleSelect} isEditing={isEditing}/>
+            <SelectStatus options={options} selectedStatus={project.status} onChange={handleSelect} isEditing={isEditing} />
           </div>
 
           {updateDate && (
@@ -114,7 +114,7 @@ function InfoProject() {
           </div>
 
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
-<ProjectDetails project={project}/>
+          <ProjectDetails project={project} />
         </div>
       ) : (
         <div>Cargando</div>

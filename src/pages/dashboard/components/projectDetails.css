@@ -1,0 +1,37 @@
+/* Define una clase para los elementos <li> */
+.phase-item {
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.073);
+    width: 24vh;
+    padding: 1vh 6vh;
+    height: 5vh;
+    font-weight: 500;
+    font-size: 20px;
+    color: #3E74FF;
+    border-radius: var(--2, 9.572px);
+
+}
+
+.container-phase {
+    margin-top: 5vh;
+}
+
+.selected-phase {
+    font-weight: bold;
+    background-color: #3E74FF;
+    color: white;
+}
+.container-type-key{
+width: 20vh;
+background-color: #3E74FF;
+
+}
+.container-milestons{
+    width: 70vh;
+    background-color: #3E74FF;
+}
+.container-keys{
+    width: 40vh;
+    background-color: #3E74FF;
+}
