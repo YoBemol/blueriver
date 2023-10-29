@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './projectDetails.css'
-
 
 function ProjectDetails({ project }) {
     // Estado para almacenar la fase seleccionada
@@ -8,10 +7,23 @@ function ProjectDetails({ project }) {
     // Estado para almacenar el tipo de "Key Update" seleccionado
     const [selectedKeyUpdateType, setSelectedKeyUpdateType] = useState(null);
 
+    useEffect(() => {
+        // Verificar si hay una fase seleccionada y tipos de "Key Update" disponibles
+        if (selectedPhase && project.key_updates[selectedPhase]) {
+            // Obtener la lista de tipos de "Key Update"
+            const keyUpdateTypes = Object.keys(project.key_updates[selectedPhase]);
+
+            // Verificar si hay tipos de "Key Update" disponibles
+            if (keyUpdateTypes.length > 0) {
+                // Establecer el primer tipo de "Key Update" como predeterminado
+                setSelectedKeyUpdateType(keyUpdateTypes[0]);
+            }
+        }
+    }, [selectedPhase, project]);
+
     // Función para manejar el clic en una fase
     const handlePhaseClick = (phaseName) => {
         setSelectedPhase(phaseName);
-        setSelectedKeyUpdateType(null); // Reiniciamos el tipo de "Key Update" seleccionado
     };
 
     // Función para manejar el clic en un tipo de "Key Update"
@@ -35,22 +47,21 @@ function ProjectDetails({ project }) {
                 </ul>
             </div>
 
-            <div  className='d-flex justify-content-between align-items-center'>
-            {selectedPhase && project.milestones[selectedPhase] && (
-                <div className='container-milestons'>
-                    <h3>Milestones para {selectedPhase}:</h3>
-                    <ul>
-                        {project.milestones[selectedPhase].map((milestone, index) => (
-                            // Itera sobre los milestones y muestra una lista de ellos.
-                            <li key={index}>
-                                {milestone.milestone_name}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
+            <div className='d-flex justify-content-between align-items-center'>
+                {selectedPhase && project.milestones[selectedPhase] && (
+                    <div className='container-milestons'>
+                        <h3>Milestones para {selectedPhase}:</h3>
+                        <ul>
+                            {project.milestones[selectedPhase].map((milestone, index) => (
+                                // Itera sobre los milestones y muestra una lista de ellos.
+                                <li key={index}>
+                                    {milestone.milestone_name}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
 
-            
                 {selectedPhase && project.key_updates[selectedPhase] && (
                     <div className='container-type-key'>
                         <h3>Tipos de Key Updates para {selectedPhase}:</h3>
@@ -70,11 +81,10 @@ function ProjectDetails({ project }) {
                             ))}
                         </ul>
                     </div>
-
                 )}
 
-                {selectedKeyUpdateType && project.key_updates[selectedPhase][selectedKeyUpdateType] && (
-                    <div>
+                {selectedKeyUpdateType && project.key_updates[selectedPhase] && project.key_updates[selectedPhase][selectedKeyUpdateType] && (
+                    <div className='container-keys'>
                         <h3>{selectedKeyUpdateType}:</h3>
                         <ul>
                             {project.key_updates[selectedPhase][selectedKeyUpdateType].map((keyUpdate) => (
@@ -95,4 +105,3 @@ function ProjectDetails({ project }) {
 }
 
 export default ProjectDetails;
-
