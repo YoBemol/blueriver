@@ -108,7 +108,7 @@ function InfoProject() {
               ) : (
                 <>
                   <span className="title-form">Objectives</span>
-                  <p className="p-objectives">{project.project_description}</p>
+                  <p className="p-objetives">{project.project_description}</p>
                 </>
               )}
               <OwnerManagerInfo project={project} />
