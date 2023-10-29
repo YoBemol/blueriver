@@ -1,9 +1,11 @@
+.search{
+    width: 80%;
+}
 .search-projects{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 8vh;
-    width: 153.5vh;
     background-color:rgba(255, 255, 255, 1);
 }
 /*************** Input *****************/
