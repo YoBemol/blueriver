@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import Search from '../../../components/Search';
-import Button from 'react-bootstrap/Button';
 import './infoProject.css';
 import SelectStatus from './SelectStatus';
 import ObjetivesInput from './ObjetivesInput';
@@ -13,7 +12,7 @@ import ProjectDetails from './ProjectDetails';
 import ModalAddMilestone from './ModalAddMilestone';
 
 function InfoProject() {
-  
+
   // Acceder al id de la URL
   const { id } = useParams();
 
@@ -170,7 +169,7 @@ function InfoProject() {
   return (
     <div className="search">
       <Search />
-      {projectLoaded ? ( 
+      {projectLoaded ? (
         <div className="container-info-project">
           <div className="container-project-name d-flex justify-content-between align-items-center">
             <p className="title-info">{project.project_name}</p>
@@ -195,13 +194,13 @@ function InfoProject() {
             </div>
             <ResourcesInfo project={project} />
           </div>
+
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
           <ProjectDetails project={project} />
-          <Button variant="primary" onClick={handleShow}>
-            Add New
-          </Button>
+
 
           <ModalAddMilestone
+            handleShow={handleShow}
             show={show}
             handleClose={handleClose}
             selectedPhase={selectedPhase}
