@@ -14,7 +14,7 @@ function TableProjects({ users }) {
         <div className='header-cell'>Project Name</div>
         <div className='header-cell'>Project Owner</div>
         <div className='header-cell'>Project Manager</div>
-        <div className='header-cell'>Status</div>
+        <div className='header-cell'>Status</div> 
       </div>
 
       <div><Spinner /></div>

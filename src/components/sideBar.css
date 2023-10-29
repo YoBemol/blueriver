@@ -6,11 +6,13 @@
 /********* Contenedor principal ******************/
 .aside, .container-link {
     width: 256px;
-    height: 100vh;
+    height: 124vh;
     display: flex;
     flex-direction: column;
     padding-top: 2vh;
     background-color: rgba(255, 255, 255, 1);
+    position: absolute;
+    z-index: 2;
 }
 /*************** Lista *******************/
 li{

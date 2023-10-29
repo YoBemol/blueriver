@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //import KeyUpdates from './keyUpdates';
-// import ModalKeyUpdates from './modalKeyUpdates';
+import ModalKeyUpdates from './modalKeyUpdates';
 import ProjectDetails from './ProjectDetails';
 
 function InfoProject() {
@@ -64,6 +64,11 @@ function InfoProject() {
     setProject({ ...project, status: event.target.value })
   }
 
+  function handletDescription(description) {
+    setNewDescription(description)
+  }
+
+
   console.log(project)
 
   return (
@@ -100,6 +105,7 @@ function InfoProject() {
             </div>
           ))}*/}
         {/* <KeyUpdates /> */}
+        <ModalKeyUpdates newDescription={handletDescription}/>
         <ProjectDetails project={project}/>
         </div>
       ) : (

@@ -1,4 +1,31 @@
-.search-projects{
+.search-projects {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  
+  .inputSearch {
+    width: 70vh;
+    border-radius: 1.5vh;
+    height: 4vh;
+    background-color: rgba(246, 248, 253, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding-left: 2vh;
+  }
+  
+  .inputSearch, .search-projects {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.146);
+  }
+  
+
+
+/* .search-projects{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +34,7 @@
     background-color:rgba(255, 255, 255, 1);
 }
 /*************** Input *****************/
-.inputSearch{
+/*.inputSearch{
     width: 70vh;
     border-radius:  1.5vh ;
     height: 4vh;
@@ -16,6 +43,6 @@
     padding-left: 2vh;
 }
 /**************/
-.inputSearch, .search-projects{
+/*.inputSearch, .search-projects{
     box-shadow:0 0 10px rgba(0, 0, 0, 0.146); 
-}
+} /*
