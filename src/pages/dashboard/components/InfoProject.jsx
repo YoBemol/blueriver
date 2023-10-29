@@ -7,6 +7,7 @@ import ObjetivesInput from './ObjetivesInput';
 import OwnerManagerInfo from './OwnerManagerInfo';
 import ResourcesInfo from './ResourcesInfo';
 import SaveButton from './SaveButton';
+import ProjectDetails from './ProjectDetails';
 
 function InfoProject() {
 
@@ -113,7 +114,7 @@ function InfoProject() {
           </div>
 
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
-
+<ProjectDetails project={project}/>
         </div>
       ) : (
         <div>Cargando</div>
