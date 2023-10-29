@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import './projectDetails.css'
-import { BsFlag} from 'react-icons/bs';
+import { BsFlag } from 'react-icons/bs';
+import { LiaStickyNoteSolid } from 'react-icons/lia';
+
 function ProjectDetails({ project }) {
     // Estado para almacenar la fase seleccionada
     const [selectedPhase, setSelectedPhase] = useState(null);
@@ -50,7 +52,7 @@ function ProjectDetails({ project }) {
             <div className='d-flex justify-content-between container-MK '>
                 {selectedPhase && project.milestones[selectedPhase] && (
                     <div className='container-milestons'>
-                        <p className='title-milestones'><BsFlag/> Milestones</p>
+                        <p className='title-milestones'><BsFlag /> Milestones</p>
                         <ul className='ul-milestone d-flex justify-content-between'>
                             <li className='title-form'>Description</li>
                             <li className='title-form' id='current-date'>Current Date</li>
@@ -65,44 +67,43 @@ function ProjectDetails({ project }) {
                         </ul>
                     </div>
                 )}
+                <div>
+                    <p className='title-milestones'><LiaStickyNoteSolid /> Other key updates / Notes </p>
+                    <div className='d-flex justify-content-between '>
+                        {selectedPhase && project.key_updates[selectedPhase] && (
+                            <div className='container-type-key'>
+                                <ul className='ul-milestone'>
+                                    {Object.keys(project.key_updates[selectedPhase]).map((keyUpdateType) => (
+                                        <li
+                                            key={keyUpdateType}
+                                            onClick={() => handleKeyUpdateTypeClick(keyUpdateType)}
+                                            className={`key-update-item ${keyUpdateType === selectedKeyUpdateType ? 'selected' : ''}`}
+                                        >
+                                            {keyUpdateType}
+                                        </li>
+                                    ))}
 
-                {selectedPhase && project.key_updates[selectedPhase] && (
-                    <div className='container-type-key'>
-                        <h3>Tipos de Key Updates para {selectedPhase}:</h3>
-                        <ul>
-                            {Object.keys(project.key_updates[selectedPhase]).map((keyUpdateType) => (
-                                // Itera sobre los tipos de "Key Updates" y muestra una lista de ellos.
-                                <li
-                                    key={keyUpdateType}
-                                    onClick={() => handleKeyUpdateTypeClick(keyUpdateType)}
-                                    style={{
-                                        cursor: 'pointer',
-                                        fontWeight: keyUpdateType === selectedKeyUpdateType ? 'bold' : 'normal',
-                                    }}
-                                >
-                                    {keyUpdateType}
-                                </li>
-                            ))}
-                        </ul>
+                                </ul>
+                            </div>
+                        )}
+
+                        {selectedKeyUpdateType && project.key_updates[selectedPhase] && project.key_updates[selectedPhase][selectedKeyUpdateType] && (
+                            <div className='container-keys'>
+                                <ul className='ul-milestone'>
+                                    {project.key_updates[selectedPhase][selectedKeyUpdateType].map((keyUpdate) => (
+                                        // Itera sobre los valores de "Key Update" para un tipo específico y muestra una lista de ellos.
+                                        <li
+                                            key={keyUpdate.key_update_id}
+                                            className='li-keys'
+                                        >
+                                            {keyUpdate.key_update_value}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
-                )}
-
-                {selectedKeyUpdateType && project.key_updates[selectedPhase] && project.key_updates[selectedPhase][selectedKeyUpdateType] && (
-                    <div className='container-keys'>
-                        <h3>{selectedKeyUpdateType}:</h3>
-                        <ul>
-                            {project.key_updates[selectedPhase][selectedKeyUpdateType].map((keyUpdate) => (
-                                // Itera sobre los valores de "Key Update" para un tipo específico y muestra una lista de ellos.
-                                <li
-                                    key={keyUpdate.key_update_id}
-                                >
-                                    {keyUpdate.key_update_value}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-
+                </div>
             </div>
         </div>
     );

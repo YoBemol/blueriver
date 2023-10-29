@@ -19,15 +19,14 @@
     margin-top: 5vh;
 }
 
-.selected-phase {
-    font-weight: bold;
+.selected-phase, .key-update-item.selected {
+    font-weight: 500;
     background-color: #3E74FF;
     color: white;
 }
 
 .container-type-key {
-    width: 20vh;
-    background-color: #3E74FF;
+    width: 15vh;
 
 }
 
@@ -37,7 +36,6 @@
 
 .container-keys {
     width: 40vh;
-    background-color: #3E74FF;
 }
 
 .title-milestones {
@@ -65,4 +63,22 @@
 }
 .milestone-date{
     margin-right: 2vh;
+}
+.key-update-item {
+    cursor: pointer;
+    font-weight: 500;
+    padding: 1vh 1vh;
+    color: #3E74FF;
+    border-radius: var(--2, 8px);
+    margin-bottom: 1vh;
+    margin-right: 2vh;
+  }
+.li-keys{
+    height: 4vh;
+    width: 40vh;
+    border-radius: 20px;
+    background-color: white;
+    padding: 3vh 2vh;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.073);
+    margin-bottom: 2vh;
 }
