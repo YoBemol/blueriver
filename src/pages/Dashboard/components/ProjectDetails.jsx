@@ -1,36 +1,42 @@
 import { useState, useEffect } from 'react';
-import './projectDetails.css'
+import './projectDetails.css';
 import { BsFlag } from 'react-icons/bs';
 import { LiaStickyNoteSolid } from 'react-icons/lia';
+import DetailsModal from './DetailsModal';
 
 function ProjectDetails({ project, phases }) {
-    // Estado para almacenar la fase seleccionada
     const [selectedPhase, setSelectedPhase] = useState(null);
-    // Estado para almacenar el tipo de "Key Update" seleccionado
     const [selectedKeyUpdateType, setSelectedKeyUpdateType] = useState(null);
+    const [show, setShow] = useState(false);
+    const [selectedMilestone, setSelectedMilestone] = useState(null);
+
+    const handleClose = () => {
+        setShow(false);
+        setSelectedMilestone(null);
+    };
+
+    const handleShow = () => setShow(true);
 
     useEffect(() => {
-        // Verificar si hay una fase seleccionada y tipos de "Key Update" disponibles
         if (selectedPhase && project.key_updates[selectedPhase]) {
-            // Obtener la lista de tipos de "Key Update"
             const keyUpdateTypes = Object.keys(project.key_updates[selectedPhase]);
-
-            // Verificar si hay tipos de "Key Update" disponibles
             if (keyUpdateTypes.length > 0) {
-                // Establecer el primer tipo de "Key Update" como predeterminado
                 setSelectedKeyUpdateType(keyUpdateTypes[0]);
             }
         }
     }, [selectedPhase, project]);
 
-    // Función para manejar el clic en una fase
     const handlePhaseClick = (phaseName) => {
         setSelectedPhase(phaseName);
     };
 
-    // Función para manejar el clic en un tipo de "Key Update"
     const handleKeyUpdateTypeClick = (keyUpdateType) => {
         setSelectedKeyUpdateType(keyUpdateType);
+    };
+
+    const handleMilestoneClick = (milestone) => {
+        setSelectedMilestone(milestone);
+        handleShow();
     };
 
     return (
@@ -59,8 +65,7 @@ function ProjectDetails({ project, phases }) {
                         </ul>
                         <ul className='ul-milestone'>
                             {project.milestones[selectedPhase].map((milestone, index) => (
-                                // Itera sobre los milestones y muestra una lista de ellos.
-                                <li key={index} className='li-milestones d-flex justify-content-between'>
+                                <li key={index} className='li-milestones d-flex justify-content-between' onClick={() => handleMilestoneClick(milestone)}>
                                     {milestone.milestone_name} <span className='milestone-date'>{milestone.milestone_plan_due_date}</span>
                                 </li>
                             ))}
@@ -82,7 +87,6 @@ function ProjectDetails({ project, phases }) {
                                             {keyUpdateType}
                                         </li>
                                     ))}
-
                                 </ul>
                             </div>
                         )}
@@ -91,7 +95,6 @@ function ProjectDetails({ project, phases }) {
                             <div className='container-keys'>
                                 <ul className='ul-milestone'>
                                     {project.key_updates[selectedPhase][selectedKeyUpdateType].map((keyUpdate) => (
-                                        // Itera sobre los valores de "Key Update" para un tipo específico y muestra una lista de ellos.
                                         <li
                                             key={keyUpdate.key_update_id}
                                             className='li-keys'
@@ -105,6 +108,8 @@ function ProjectDetails({ project, phases }) {
                     </div>
                 </div>
             </div>
+
+            <DetailsModal show={show} handleClose={handleClose} item={selectedMilestone} title='Milestones' />
         </div>
     );
 }

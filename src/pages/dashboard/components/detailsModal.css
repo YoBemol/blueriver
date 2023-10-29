@@ -1,0 +1,11 @@
+#selected-title{
+    font-size: 20px;
+}
+#selected-milestone{
+    width: 75vh;
+    margin-top: 2vh;
+}
+.icon-close{
+    font-size: 3vh;
+    cursor: pointer;
+}

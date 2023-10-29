@@ -54,12 +54,16 @@
 
 }
 
+.container-modal-milestones{
+    width: 90vh;
+}
+
 .ul-milestone {
     list-style: none;
     padding: 0;
 }
 #current-date{
-    margin-right: 15vh;
+    margin-right: 10vh;
 }
 .milestone-date{
     margin-right: 2vh;
