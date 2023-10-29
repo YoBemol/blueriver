@@ -17,14 +17,25 @@ function InfoProject() {
   // Estado
   const [project, setProject] = useState({});
 
-   // Estado para indicar si los datos del proyecto se han cargado
+  // Estado para indicar si los datos del proyecto se han cargado
   const [projectLoaded, setProjectLoaded] = useState(false);
+
+  // Almacenar datos del formulario de milestone
+  const [newMilestone, setNewMilestone] = useState({
+    milestone: '',
+    plan_due_date: '',
+  });
 
   // Estado que almacena la fecha de actualización
   const [updateDate, setUpdateDate] = useState(new Date());
 
-  // Estado para controlar si esta editando o guardando
+  // Estado para controlar si está editando o guardando
   const [isEditing, setIsEditing] = useState(false);
+
+  const phases = ["Initiation", "Planning", "Execution", "Monitoring", "Closure"];
+
+  // Estado para almacenar la fase seleccionada
+  const [selectedPhase, setSelectedPhase] = useState("Initiation"); // Inicialmente seleccionamos "initiation"
 
   // Opciones para el select del estado
   const options = [
@@ -74,6 +85,48 @@ function InfoProject() {
       .catch((error) => console.error(error));
   };
 
+  // Agregar un nuevo milestone
+ // Agregar un nuevo milestone
+const handleAddMilestone = (e) => {
+  e.preventDefault();
+
+  const newMilestoneData = {
+    phase: selectedPhase,
+    milestone: newMilestone.milestone,
+    plan_due_date: newMilestone.plan_due_date,
+  };
+
+  // Check if milestones[selectedPhase] is an array or initialize it as an empty array
+  const newMilestonesArray = Array.isArray(project.milestones[selectedPhase])
+    ? project.milestones[selectedPhase]
+    : [];
+
+  fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}/milestone`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newMilestoneData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Update the state by creating a new object
+      setProject((prevProject) => ({
+        ...prevProject,
+        milestones: {
+          ...prevProject.milestones,
+          [selectedPhase]: [...newMilestonesArray, data], // Add the new milestone to the array
+        },
+      }));
+      // Restablece el estado del formulario
+      setNewMilestone({
+        milestone: '',
+        plan_due_date: '',
+      });
+    })
+    .catch((error) => console.error(error));
+};
+
   // Función para indicar que el componente está en modo de edición
   const handleEdit = () => {
     setIsEditing(true);
@@ -87,6 +140,11 @@ function InfoProject() {
     setProject({ ...project, project_description: event.target.value });
   };
 
+  // Función para manejar el cambio de fase seleccionada por el usuario
+  const handlePhaseChange = (newPhase) => {
+    setSelectedPhase(newPhase);
+  };
+  
   return (
     <div className="search">
       <Search />
@@ -117,12 +175,52 @@ function InfoProject() {
           </div>
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
           <ProjectDetails project={project} />
+          <div>
+            <p className="title-form">Select Phase:</p>
+            {phases.map((phase) => (
+              <label key={phase}>
+                <input
+                  type="radio"
+                  name="selectedPhase"
+                  value={phase}
+                  checked={selectedPhase === phase}
+                  onChange={() => handlePhaseChange(phase)}
+                />
+                {phase}
+              </label>
+            ))}
+          </div>
+          <form>
+            <input
+              type="text"
+              name="milestone"
+              value={newMilestone.milestone}
+              onChange={(e) =>
+                setNewMilestone({ ...newMilestone, milestone: e.target.value })
+              }
+              placeholder="Nombre del hito"
+            />
+            <input
+              type="date"
+              name="plan_due_date"
+              value={newMilestone.plan_due_date}
+              onChange={(e) =>
+                setNewMilestone({
+                  ...newMilestone,
+                  plan_due_date: e.target.value,
+                })
+              }
+              placeholder="Fecha de vencimiento planificada"
+            />
+            <button type="submit" onClick={handleAddMilestone}>
+              Agregar Hito
+            </button>
+          </form>
         </div>
       ) : (
         <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-        <Spinner animation="border" id='spinner' role="status"/>
-      </div>
-
+          <Spinner animation="border" id="spinner" role="status" />
+        </div>
       )}
     </div>
   );
