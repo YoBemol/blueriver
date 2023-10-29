@@ -43,7 +43,7 @@ function InfoProject() {
   });
 
   //Almacenar phases
-  const phases = ["Initiation", "Planning", "Execution", "Monitoring", "Closure"];
+  const [phases, setPhases] = useState([]);
 
   // Opciones para el select del estado
   const options = [
@@ -53,91 +53,100 @@ function InfoProject() {
     { label: 'Done', value: 'Done' },
   ];
 
+  // Función para convertir la primera letra de una cadena en mayúscula
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
 
-  // Método GET para traer información del proyecto
-  useEffect(() => {
-    fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setProject(data);
-        setProjectLoaded(true);
+
+// Método GET para traer información del proyecto 
+useEffect(() => {
+  fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`)
+    .then((response) => response.json())
+    .then((data) => {
+      setProject(data);
+      // Obtén la lista de fases del proyecto y guárdala en el estado
+      if (data.milestones) {
+        const projectPhases = Object.keys(data.milestones).map(phase => phase.toLowerCase());
+        setPhases(projectPhases);
+      }
+      setProjectLoaded(true);
+    });
+}, [id]);
+
+// Función para manejar la actualización de objetivos
+const addObjetives = () => {
+  // El componente está en modo guardado
+  setIsEditing(false);
+
+  // Cada vez que se ejecute, se actualiza la fecha
+  const currentDate = new Date();
+  setUpdateDate(currentDate);
+
+  // Objeto que contiene la información actualizada del proyecto
+  const updatedProject = {
+    project_description: project.project_description,
+    project_status: project.status,
+  };
+
+  fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedProject),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log('Actualizada----------:', data);
+      console.log('***************', project.status);
+    })
+    .catch((error) => console.error(error));
+};
+
+// Agregar un nuevo milestone
+const handleAddMilestone = (e) => {
+  e.preventDefault();
+  // Objeto que contiene el milestone agregado del proyecto
+  const newMilestoneData = {
+    phase: capitalizeFirstLetter(selectedPhase), // Usar la fase seleccionada con la primera letra en mayúscula
+    milestone: newMilestone.milestone,
+    plan_due_date: newMilestone.plan_due_date,
+  };
+
+  // Comprobar si milestones[selectedPhase] es un array o inicializarla como un array vacío
+  const newMilestonesArray = Array.isArray(project.milestones[selectedPhase])
+    ? project.milestones[selectedPhase]
+    : [];
+
+  fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}/milestone`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newMilestoneData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Actualizar el estado creando un nuevo objeto.
+      setProject((prevProject) => ({
+        ...prevProject,
+        milestones: {
+          ...prevProject.milestones,
+          [selectedPhase]: [...newMilestonesArray, data], // agregar el nuevo milestone al array
+        },
+      }));
+      // Restablece el estado del formulario
+      setNewMilestone({
+        milestone: '',
+        plan_due_date: '',
       });
-  }, [id]);
-
-  // Función para manejar la actualización de objetivos
-  const addObjetives = () => {
-    // El componente está en modo guardado
-    setIsEditing(false);
-
-    // Cada vez que se ejecute, se actualiza la fecha
-    const currentDate = new Date();
-    setUpdateDate(currentDate);
-
-    // Objeto que contiene la información actualizada del proyecto
-    const updatedProject = {
-      project_description: project.project_description,
-      project_status: project.status,
-    };
-
-    fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updatedProject),
+      handleClose();
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Actualizada----------:', data);
-        console.log('***************', project.status);
-      })
-      .catch((error) => console.error(error));
-  };
+    .catch((error) => console.error(error));
+};
 
 
-
-  // Agregar un nuevo milestone
-  const handleAddMilestone = (e) => {
-    e.preventDefault();
-    // Objeto que contiene el milestone agregado del proyecto
-    const newMilestoneData = {
-      phase: selectedPhase,
-      milestone: newMilestone.milestone,
-      plan_due_date: newMilestone.plan_due_date,
-    };
-
-    // Comprobar si milestones[selectedPhase] es un array o inicializarla como una array vacío
-    const newMilestonesArray = Array.isArray(project.milestones[selectedPhase])
-      ? project.milestones[selectedPhase]
-      : [];
-
-    fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}/milestone`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newMilestoneData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Actualizar el estado creando un nuevo objeto.
-        setProject((prevProject) => ({
-          ...prevProject,
-          milestones: {
-            ...prevProject.milestones,
-            [selectedPhase]: [...newMilestonesArray, data], // se agrega el nuevo milestone al array
-          },
-        }));
-        // Restablece el estado del formulario
-        setNewMilestone({
-          milestone: '',
-          plan_due_date: '',
-        });
-        handleClose();
-      })
-
-      .catch((error) => console.error(error));
-  };
 
 
   //Funciones para abrir y cerrar el modal 
@@ -196,7 +205,7 @@ function InfoProject() {
           </div>
 
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
-          <ProjectDetails project={project} />
+          <ProjectDetails project={project} phases={phases}/>
 
 
           <ModalAddMilestone

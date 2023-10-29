@@ -3,7 +3,7 @@ import './projectDetails.css'
 import { BsFlag } from 'react-icons/bs';
 import { LiaStickyNoteSolid } from 'react-icons/lia';
 
-function ProjectDetails({ project }) {
+function ProjectDetails({ project, phases }) {
     // Estado para almacenar la fase seleccionada
     const [selectedPhase, setSelectedPhase] = useState(null);
     // Estado para almacenar el tipo de "Key Update" seleccionado
@@ -37,7 +37,7 @@ function ProjectDetails({ project }) {
         <div>
             <div className='container-phase'>
                 <ul className='d-flex justify-content-between align-items-center'>
-                    {Object.keys(project.milestones).map((phaseName) => (
+                    {phases.map((phaseName) => (
                         <li
                             key={phaseName}
                             onClick={() => handlePhaseClick(phaseName)}
@@ -55,7 +55,7 @@ function ProjectDetails({ project }) {
                         <p className='title-milestones'><BsFlag /> Milestones</p>
                         <ul className='ul-milestone d-flex justify-content-between'>
                             <li className='title-form'>Description</li>
-                            <li className='title-form' id='current-date'>Current Date</li>
+                            <li className='title-form' id='current-date'>Expiration Date</li>
                         </ul>
                         <ul className='ul-milestone'>
                             {project.milestones[selectedPhase].map((milestone, index) => (
