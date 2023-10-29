@@ -39,3 +39,8 @@
 .text-OM{
     width: 30vh;
 }
+#spinner{
+height: 40px;
+width: 40px;
+color: #3E74FF;
+}
