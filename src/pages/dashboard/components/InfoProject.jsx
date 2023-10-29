@@ -205,7 +205,7 @@ const handleAddMilestone = (e) => {
           </div>
 
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
-          <ProjectDetails project={project} phases={phases}/>
+          <ProjectDetails project={project} phases={phases} setProject={setProject}/>
 
 
           <ModalAddMilestone

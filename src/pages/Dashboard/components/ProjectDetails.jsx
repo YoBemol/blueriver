@@ -4,7 +4,7 @@ import { BsFlag } from 'react-icons/bs';
 import { LiaStickyNoteSolid } from 'react-icons/lia';
 import DetailsModal from './DetailsModal';
 
-function ProjectDetails({ project, phases }) {
+function ProjectDetails({ project, phases, setProject }) {
     const [selectedPhase, setSelectedPhase] = useState(null);
     const [selectedKeyUpdateType, setSelectedKeyUpdateType] = useState(null);
     const [show, setShow] = useState(false);
@@ -16,7 +16,23 @@ function ProjectDetails({ project, phases }) {
     };
 
     const handleShow = () => setShow(true);
-
+// Agregar esta función para eliminar un milestone
+const handleDeleteMilestone = (milestoneToDelete) => {
+    // Filtrar la lista de milestones para excluir el milestone que se va a eliminar
+    const updatedMilestones = project.milestones[selectedPhase].filter(
+      (milestone) => milestone !== milestoneToDelete
+    );
+  
+    // Actualizar el estado local con la nueva lista de milestones
+    setProject((prevProject) => ({
+      ...prevProject,
+      milestones: {
+        ...prevProject.milestones,
+        [selectedPhase]: updatedMilestones,
+      },
+    }));
+  };
+  
     useEffect(() => {
         if (selectedPhase && project.key_updates[selectedPhase]) {
             const keyUpdateTypes = Object.keys(project.key_updates[selectedPhase]);
@@ -67,6 +83,7 @@ function ProjectDetails({ project, phases }) {
                             {project.milestones[selectedPhase].map((milestone, index) => (
                                 <li key={index} className='li-milestones d-flex justify-content-between' onClick={() => handleMilestoneClick(milestone)}>
                                     {milestone.milestone_name} <span className='milestone-date'>{milestone.milestone_plan_due_date}</span>
+                                    <button onClick={() => handleDeleteMilestone(milestone)}>Eliminar</button>
                                 </li>
                             ))}
                         </ul>
