@@ -114,7 +114,7 @@ function InfoProject() {
           </div>
 
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
-          <ProjectDetails project={project} />
+          <ProjectDetails project={project}/>
         </div>
       ) : (
         <div>Cargando</div>

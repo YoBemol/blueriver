@@ -12,7 +12,9 @@
     border-radius: var(--2, 9.572px);
 
 }
-
+.container-MK{
+    margin-top: 5vh;
+}
 .container-phase {
     margin-top: 5vh;
 }
@@ -22,16 +24,45 @@
     background-color: #3E74FF;
     color: white;
 }
-.container-type-key{
-width: 20vh;
-background-color: #3E74FF;
+
+.container-type-key {
+    width: 20vh;
+    background-color: #3E74FF;
 
 }
-.container-milestons{
-    width: 70vh;
-    background-color: #3E74FF;
+
+.container-milestons {
+    width: 80vh;
 }
-.container-keys{
+
+.container-keys {
     width: 40vh;
     background-color: #3E74FF;
+}
+
+.title-milestones {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.li-milestones {
+    height: 7vh;
+    width: 70vh;
+    border-radius: 20px;
+    background-color: white;
+    padding: 0 2vh;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.073);
+    margin-bottom: 2vh;
+
+}
+
+.ul-milestone {
+    list-style: none;
+    padding: 0;
+}
+#current-date{
+    margin-right: 15vh;
+}
+.milestone-date{
+    margin-right: 2vh;
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './projectDetails.css'
-
+import { BsFlag} from 'react-icons/bs';
 function ProjectDetails({ project }) {
     // Estado para almacenar la fase seleccionada
     const [selectedPhase, setSelectedPhase] = useState(null);
@@ -47,15 +47,19 @@ function ProjectDetails({ project }) {
                 </ul>
             </div>
 
-            <div className='d-flex justify-content-between align-items-center'>
+            <div className='d-flex justify-content-between container-MK '>
                 {selectedPhase && project.milestones[selectedPhase] && (
                     <div className='container-milestons'>
-                        <h3>Milestones para {selectedPhase}:</h3>
-                        <ul>
+                        <p className='title-milestones'><BsFlag/> Milestones</p>
+                        <ul className='ul-milestone d-flex justify-content-between'>
+                            <li className='title-form'>Description</li>
+                            <li className='title-form' id='current-date'>Current Date</li>
+                        </ul>
+                        <ul className='ul-milestone'>
                             {project.milestones[selectedPhase].map((milestone, index) => (
                                 // Itera sobre los milestones y muestra una lista de ellos.
-                                <li key={index}>
-                                    {milestone.milestone_name}
+                                <li key={index} className='li-milestones d-flex justify-content-between'>
+                                    {milestone.milestone_name} <span className='milestone-date'>{milestone.milestone_plan_due_date}</span>
                                 </li>
                             ))}
                         </ul>
