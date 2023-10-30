@@ -10,6 +10,7 @@ import ResourcesInfo from './ResourcesInfo';
 import SaveButton from './SaveButton';
 import ProjectDetails from './ProjectDetails';
 import ModalAddMilestone from './ModalAddMilestone';
+import ModalAddKey from './ModalAddKey';
 
 function InfoProject() {
 
@@ -21,7 +22,7 @@ function InfoProject() {
 
   //Estado para indicar la apertura y cierre del modal 
   const [show, setShow] = useState(false);
-
+  const [showKey, setShowKey] = useState(false);
   // Estado para indicar si los datos del proyecto se han cargado
   const [projectLoaded, setProjectLoaded] = useState(false);
 
@@ -156,23 +157,26 @@ function InfoProject() {
       })
       .catch((error) => console.error(error));
   };
+
+
+  //Agregar un nuevo Key
   const handleAddKeys = (e) => {
     e.preventDefault();
-  
+
     // Verificar si el campo key_update tiene un valor seleccionado
     if (!newKeys.value || !newKeys.key_update) {
       // Manejar el caso en el que no se haya seleccionado una opción
       console.error('Debes seleccionar un valor y un tipo de clave.');
       return;
     }
-  
+
     // Objeto que contiene el key agregado del proyecto
     const newKeysData = {
       phase: capitalizeFirstLetter(selectedPhase), // Usar la fase seleccionada con la primera letra en mayúscula
       value: newKeys.value,
       key_update: newKeys.key_update,
     };
-  
+
     fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}/phase-key-updates`, {
       method: 'POST',
       headers: {
@@ -199,13 +203,16 @@ function InfoProject() {
       })
       .catch((error) => console.error(error));
   };
-  
+
 
 
   //Funciones para abrir y cerrar el modal 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //Funciones para abrir y cerrar el modal 
+  const handleCloseKey = () => setShowKey(false);
+  const handleShowKey = () => setShowKey(true);
 
   // Función para indicar que el componente está en modo de edición
   const handleEdit = () => {
@@ -260,68 +267,38 @@ function InfoProject() {
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
           <ProjectDetails project={project} phases={phases} setProject={setProject} />
 
-
-          <ModalAddMilestone
-            handleShow={handleShow}
-            show={show}
-            handleClose={handleClose}
-            selectedPhase={selectedPhase}
-            newMilestone={newMilestone}
-            handlePhaseChange={handlePhaseChange}
-            handleAddMilestone={handleAddMilestone}
-            handleMilestoneChange={(e) => setNewMilestone({ ...newMilestone, milestone: e.target.value })}
-            handlePlanDueDateChange={(e) => setNewMilestone({ ...newMilestone, plan_due_date: e.target.value })}
-            phases={phases}
-          />
-       <div>
-          <label htmlFor="keyValue">Key Value:</label>
-            <input
-              type="text"
-              className="form-control"
-              id="keyValue"
-              value={newKeys.value}
-              onChange={(e) => setNewKeys({ ...newKeys, value: e.target.value })}
+          <div className='d-flex justify-content-between align-items-center'>
+            <ModalAddMilestone
+              handleShow={handleShow}
+              show={show}
+              handleClose={handleClose}
+              selectedPhase={selectedPhase}
+              newMilestone={newMilestone}
+              handlePhaseChange={handlePhaseChange}
+              handleAddMilestone={handleAddMilestone}
+              handleMilestoneChange={(e) => setNewMilestone({ ...newMilestone, milestone: e.target.value })}
+              handlePlanDueDateChange={(e) => setNewMilestone({ ...newMilestone, plan_due_date: e.target.value })}
+              phases={phases}
             />
+            <ModalAddKey
+              handleShow={handleShowKey}
+              show={showKey}
+              handleClose={handleCloseKey}
+              selectedPhase={selectedPhase}
+              newKeys={newKeys}
+              setNewKeys={setNewKeys}
+              phases={phases}
+              handlePhaseChange={handlePhaseChange}
+              handleAddKeys={handleAddKeys} />
           </div>
-          <div className="form-group">
-            <label htmlFor="keyUpdate">Key Update:</label>
-            <select
-              className="form-control"
-              id="keyUpdate"
-              value={newKeys.key_update}
-              onChange={(e) => setNewKeys({ ...newKeys, key_update: e.target.value })}
-            >
-              <option value="">Select Key Update</option>
-              <option value="Highlights & Concerns">Highlights & Concerns</option>
-              <option value="Risks & Mitigations">Risks & Mitigations</option>
-              <option value="Decisions & Delays">Decisions & Delays</option>
-              <option value="Help Needed">Help Needed</option>
-              <option value="Notes">Notes</option>
-            </select>
 
-            {phases.map((phase) => (
-                                    <div key={phase} className="form-check">
-                                        <input
-                                            type="radio"
-                                            name="selectedPhase"
-                                            value={phase}
-                                            checked={selectedPhase === phase}
-                                            onChange={() => handlePhaseChange(phase)}
-                                            className="form-check-input"
-                                        />
-                                        <label className="form-check-label">{phase}</label>
-                                    </div>
-                                ))}
-          </div>
-              <button type="submit" className="btn btn-primary" onClick={handleAddKeys}>Add Key</button>
-            
         </div>
-  ) : (
-    <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-      <Spinner animation="border" id="spinner" role="status" />
-    </div>
-  )
-}
+      ) : (
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+          <Spinner animation="border" id="spinner" role="status" />
+        </div>
+      )
+      }
     </div >
   );
 }
