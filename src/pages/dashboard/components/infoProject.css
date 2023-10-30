@@ -1,0 +1,46 @@
+.title-info {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.container-info-project {
+    margin: 5vh;
+}
+.container-info{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.text-date {
+    text-align: right;
+    margin-top: 1vh;
+    font-size: 14px;
+    font-weight: 500;
+}
+#description-text{
+    width: 68vh;
+}
+.container-input-info{
+    width: 63vh;
+}
+
+.title-form{
+    color: #A8A8A8;
+    font-size: 16px;
+}
+.p-objetives, .text-OM, #description-text{
+    margin-top: 2vh;
+    padding: 2vh;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow:0 0 15px rgba(0, 0, 0, 0.073); 
+}
+
+.text-OM{
+    width: 30vh;
+}
+#spinner{
+height: 40px;
+width: 40px;
+color: #3E74FF;
+}

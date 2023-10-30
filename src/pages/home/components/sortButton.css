@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 2vh 5vh 2vh 5vh;
+    margin: 2vh 2vh;
   }
   
   .container-projects {
@@ -17,8 +17,9 @@
   }
   .icono-projects{
     margin-right: 1vh;
-    position: relative;
-    top: -9px;
+
+    margin-bottom: 2vh;
+
   }
   
 

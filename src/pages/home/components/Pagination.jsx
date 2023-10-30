@@ -1,28 +1,26 @@
-// Pagination.js
-// import React from 'react';
+
+import Pagination from 'react-bootstrap/Pagination';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './paginacion.css';
 
-const pageItemStyle = {
-  display: 'inline',
-  margin: '0.2rem',
-};
 
-function Pagination({ currentPage, totalPages, onPageChange }) {
+function PaginationHome({ currentPage, totalPages, onPageChange }) {
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
     <nav className="pagination-container">
       <ul className="pagination">
+
         {pageNumbers.map((pageNumber) => (
-          <li key={pageNumber} style={pageItemStyle} className={`page-item ${currentPage === pageNumber ? 'active' : ''}`}>
-            <button onClick={() => onPageChange(pageNumber)} className="page-link">
-              {pageNumber}
-            </button>
-          </li>
+          <Pagination.Item onClick={() => onPageChange(pageNumber)} key={pageNumber}>
+            {pageNumber}
+          </Pagination.Item>
         ))}
-      </ul>
+
     </nav>
   );
 }
 
-export default Pagination;
+
+export default PaginationHome;
+

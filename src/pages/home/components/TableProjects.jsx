@@ -1,6 +1,10 @@
+import StatusIcon from '../../Dashboard/components/StatusIcon';
 import './tableProjects.css';
+
+
 import {AiTwotoneExclamationCircle } from "react-icons/ai";
 import { Spinner } from "reactstrap"
+
 
 
 function TableProjects({ users }) {
@@ -22,9 +26,9 @@ function TableProjects({ users }) {
         {users && users.map((user) => (
           <div key={user.id} className='table-row' onClick={() => handleClick(user.id)}>
             <div className='cell cell-name'>{user.project_name}</div>
-            <div className='cell cell-OM'>{user.project_owner}</div>
-            <div className='cell cell-OM'>{user.project_manager}</div>
-            <div className='cell cell-status'><AiTwotoneExclamationCircle className='icon-status'/>{user.status}</div>
+            <div className='cell cell-OM'>{user.project_manager ? user.project_manager : 'Javier Mendez'}</div>
+            <div className='cell cell-OM'>{user.project_owner ? user.project_owner : 'Carlos Gonzales'}</div>
+            <div className='cell cell-status'><StatusIcon status={user.status}/> {user.status}</div>
           </div>
         ))}
       </div>

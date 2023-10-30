@@ -1,10 +1,7 @@
 .table-projects {
-    display: flex;
+  display: flex;
     flex-direction: column;
-    margin-left: 43vh;
-    width: 145vh;
-    top:139px;
-    position: absolute;
+    margin: 0 2vh;
   }
   
   .table-header {
@@ -61,7 +58,6 @@
     flex: 1;
   }
   .icon-status{
-    color: rgba(87, 167, 115, 1);
     margin-right: 1vh;
 
   }

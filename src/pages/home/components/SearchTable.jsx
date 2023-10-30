@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import TableProjects from './TableProjects';
 import Search from '../../../components/Search';
 import SortButton from './SortButton';
-import Pagination from './Pagination';
-
+import PaginationHome from './Pagination';
 
 
 function SearchTable() {
@@ -59,7 +58,7 @@ function SearchTable() {
       <SortButton ordenAZ={ordenAZ} onClick={tableSort} />
       <TableProjects users={currentProjects} />
       {filteredUsers && (
-        <Pagination
+        <PaginationHome
           currentPage={currentPage}
           totalPages={Math.ceil(filteredUsers.length / projectsPerPage)}
           onPageChange={setCurrentPage}
