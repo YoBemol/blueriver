@@ -11,10 +11,15 @@
     margin-right: auto;
     font-size: 20px;
     font-weight: 500;
+    top: 80px;
+    position: relative;
+    left: 289px;
   }
   .icono-projects{
     margin-right: 1vh;
+
     margin-bottom: 2vh;
+
   }
   
 
@@ -24,6 +29,9 @@
   font-size: 16px;
   color: rgba(168, 168, 168, 1);
   font-weight: 500;
+  top: 80px;
+  position: relative;
+  right: 111px;
 }
 .button-sort:hover{
     cursor: pointer; 

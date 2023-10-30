@@ -2,6 +2,11 @@ import StatusIcon from '../../Dashboard/components/StatusIcon';
 import './tableProjects.css';
 
 
+import {AiTwotoneExclamationCircle } from "react-icons/ai";
+import { Spinner } from "reactstrap"
+
+
+
 function TableProjects({ users }) {
   const handleClick = (userId) => {
     window.location.href = `/dashboard/${userId}`;
@@ -13,9 +18,10 @@ function TableProjects({ users }) {
         <div className='header-cell'>Project Name</div>
         <div className='header-cell'>Project Owner</div>
         <div className='header-cell'>Project Manager</div>
-        <div className='header-cell'>Status</div>
+        <div className='header-cell'>Status</div> 
       </div>
 
+      <div><Spinner /></div>
       <div className='table-body'>
         {users && users.map((user) => (
           <div key={user.id} className='table-row' onClick={() => handleClick(user.id)}>
