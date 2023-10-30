@@ -6,7 +6,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { RiDeleteBinLine } from 'react-icons/ri';
 
 
-function DetailsModal({ show, handleClose, item, title }) {
+function DetailsModal({ show, handleClose, item, title, handleDelete }) {
     return (
         <Modal show={show} onHide={handleClose}>
 
@@ -37,7 +37,7 @@ function DetailsModal({ show, handleClose, item, title }) {
                         <Button variant="primary" onClick={handleClose}>
                             Save Changes
                         </Button>
-                        <RiDeleteBinLine className='icon-close'/>
+                        <RiDeleteBinLine className='icon-close' onClick={() => handleDelete(item)}/>
                 
                     </div>
                     

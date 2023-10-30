@@ -83,7 +83,6 @@ const handleDeleteMilestone = (milestoneToDelete) => {
                             {project.milestones[selectedPhase].map((milestone, index) => (
                                 <li key={index} className='li-milestones d-flex justify-content-between' onClick={() => handleMilestoneClick(milestone)}>
                                     {milestone.milestone_name} <span className='milestone-date'>{milestone.milestone_plan_due_date}</span>
-                                    <button onClick={() => handleDeleteMilestone(milestone)}>Eliminar</button>
                                 </li>
                             ))}
                         </ul>
@@ -126,7 +125,7 @@ const handleDeleteMilestone = (milestoneToDelete) => {
                 </div>
             </div>
 
-            <DetailsModal show={show} handleClose={handleClose} item={selectedMilestone} title='Milestones' />
+            <DetailsModal show={show} handleClose={handleClose} item={selectedMilestone} title='Milestones'  handleDelete={handleDeleteMilestone}/>
         </div>
     );
 }
