@@ -78,10 +78,6 @@ function InfoProject() {
           const projectPhases = Object.keys(data.milestones).map((phase) => phase.toLowerCase());
           setPhases(projectPhases);
         }
-
-
-
-        console.log('***********************', keyUpdate)
         setProjectLoaded(true);
       });
   }, [id]);
@@ -267,7 +263,7 @@ function InfoProject() {
           <SaveButton isEditing={isEditing} onSave={addObjetives} onEdit={handleEdit} />
           <ProjectDetails project={project} phases={phases} setProject={setProject} />
 
-          <div className='d-flex justify-content-between align-items-center'>
+          <div className=''>
             <ModalAddMilestone
               handleShow={handleShow}
               show={show}

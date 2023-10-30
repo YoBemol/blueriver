@@ -3,19 +3,30 @@ import './projectDetails.css';
 import { BsFlag } from 'react-icons/bs';
 import { LiaStickyNoteSolid } from 'react-icons/lia';
 import DetailsModal from './DetailsModal';
+import { RiDeleteBinLine } from 'react-icons/ri';
 
 function ProjectDetails({ project, phases, setProject }) {
     const [selectedPhase, setSelectedPhase] = useState(null);
     const [selectedKeyUpdateType, setSelectedKeyUpdateType] = useState(null);
     const [show, setShow] = useState(false);
     const [selectedMilestone, setSelectedMilestone] = useState(null);
+    const [selectedKey, setSelectedKey] = useState(null); 
 
     const handleClose = () => {
         setShow(false);
         setSelectedMilestone(null);
+        setSelectedKey(null)
     };
 
     const handleShow = () => setShow(true);
+
+  // Agregar esta función para ver detalles de una clave
+  const handleViewKeyDetails = (keyToUpdate) => {
+    setSelectedKey(keyToUpdate);
+    handleShow();
+  };
+
+
 // Agregar esta función para eliminar un milestone
 const handleDeleteMilestone = (milestoneToDelete) => {
     // Filtrar la lista de milestones para excluir el milestone que se va a eliminar
@@ -32,7 +43,24 @@ const handleDeleteMilestone = (milestoneToDelete) => {
       },
     }));
   };
-  
+  const handleDeleteKeyUpdate = (keyUpdateToDelete) => {
+  // 1. Obtén una copia del objeto key_updates del estado
+  const updatedKeyUpdates = { ...project.key_updates };
+
+  // 2. Elimina la clave que deseas eliminar
+  if (updatedKeyUpdates[selectedPhase] && updatedKeyUpdates[selectedPhase][selectedKeyUpdateType]) {
+    updatedKeyUpdates[selectedPhase][selectedKeyUpdateType] = updatedKeyUpdates[selectedPhase][selectedKeyUpdateType].filter(
+      (keyUpdate) => keyUpdate !== keyUpdateToDelete
+    );
+  }
+
+  // 3. Actualiza el estado con la copia del objeto actualizado
+  setProject((prevProject) => ({
+    ...prevProject,
+    key_updates: updatedKeyUpdates,
+  }));
+};
+
     useEffect(() => {
         if (selectedPhase && project.key_updates[selectedPhase]) {
             const keyUpdateTypes = Object.keys(project.key_updates[selectedPhase]);
@@ -100,6 +128,7 @@ const handleDeleteMilestone = (milestoneToDelete) => {
                                             onClick={() => handleKeyUpdateTypeClick(keyUpdateType)}
                                             className={`key-update-item ${keyUpdateType === selectedKeyUpdateType ? 'selected' : ''}`}
                                         >
+                                           
                                             {keyUpdateType}
                                         </li>
                                     ))}
@@ -112,10 +141,13 @@ const handleDeleteMilestone = (milestoneToDelete) => {
                                 <ul className='ul-milestone'>
                                     {project.key_updates[selectedPhase][selectedKeyUpdateType].map((keyUpdate) => (
                                         <li
+
                                             key={keyUpdate.key_update_id}
-                                            className='li-keys'
+                                           className='li-keys d-flex justify-content-between '
                                         >
-                                            {keyUpdate.key_update_value}
+                                                 
+                                           <span> {keyUpdate.key_update_value}</span>
+                                            <RiDeleteBinLine className='icon-close' onClick={() => handleDeleteKeyUpdate(keyUpdate)}/>
                                         </li>
                                     ))}
                                 </ul>
@@ -125,7 +157,7 @@ const handleDeleteMilestone = (milestoneToDelete) => {
                 </div>
             </div>
 
-            <DetailsModal show={show} handleClose={handleClose} item={selectedMilestone} title='Milestones'  handleDelete={handleDeleteMilestone}/>
+            <DetailsModal show={show} handleClose={handleClose} item={selectedMilestone} title='Milestones'  handleDelete={handleDeleteMilestone}      onViewKeyDetails={handleViewKeyDetails}/>
         </div>
     );
 }
