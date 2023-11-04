@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
 import Spinner from 'react-bootstrap/Spinner';
 import Search from '../../../components/Search';
 import './infoProject.css';
@@ -9,9 +8,6 @@ import ObjetivesInput from './ObjetivesInput';
 import OwnerManagerInfo from './OwnerManagerInfo';
 import ResourcesInfo from './ResourcesInfo';
 import SaveButton from './SaveButton';
-
-import ModalKeyUpdates from './modalKeyUpdates';
-
 import ProjectDetails from './ProjectDetails';
 import ModalAddMilestone from './ModalAddMilestone';
 import ModalAddKey from './ModalAddKey';
@@ -54,7 +50,7 @@ function InfoProject() {
 
   //Almacenar phases
   const [phases, setPhases] = useState([]);
-  const [keyUpdate, setKeyUpdate] = useState([])
+  //const [keyUpdate, setKeyUpdate] = useState([])
 
   // Opciones para el select del estado
   const options = [
@@ -68,7 +64,6 @@ function InfoProject() {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
 
 
   useEffect(() => {
@@ -87,10 +82,6 @@ function InfoProject() {
       });
   }, [id]);
 
-  const updatedProject = {
-    project_description: project.project_description,
-    project_status: project.status,
-  };
 
   // Función para manejar la actualización de objetivos
   const addObjetives = () => {
@@ -107,15 +98,12 @@ function InfoProject() {
       project_status: project.status,
     };
 
-
     fetch(`https://dev-api.focalpoint.nearshoretc.com/project/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-
       body: JSON.stringify(updatedProject),
-
     })
       .then((response) => response.json())
       .then((data) => {
@@ -123,7 +111,6 @@ function InfoProject() {
       })
       .catch((error) => console.error(error));
   };
-
 
   // Agregar un nuevo milestone
   const handleAddMilestone = (e) => {
@@ -269,43 +256,6 @@ function InfoProject() {
                 </>
               )}
               <OwnerManagerInfo project={project} />
-
-
-  function handleSelect(event) {
-    setProject({ ...project, status: event.target.value })
-  }
-
-  function handletDescription(description) {
-    setNewDescription(description)
-  }
-
-
-  console.log(project)
-
-  return (
-    <div>
-      {project ? (
-        <div>
-          <h2>{project.project_name}</h2>
-          <p>Descripción: {project.project_description}</p>
-          <p>key: {project.key_updates.initiation['Highlights & Concerns'][0].key_update_value}</p>
-          <input
-            type="text"
-            value={project.project_description}
-            onChange={(e) => setProject({ ...project, project_description: e.target.value })}
-          />
-
-          {/* <h1>{id}</h1> */}
-          <div className='d-flex flex-row-reverse '>
-            <div className='w-25 p-3 border rounded'>
-              <h4>Status</h4>
-              <select className='form-select' onChange={handleSelect}>
-                {options.map((option, index) => (
-                  <option value={option.value} key={index}>{option.label}</option>
-                ))}
-              </select>
-              <p>{project.status}</p>
-
             </div>
             <ResourcesInfo project={project} />
           </div>
@@ -337,12 +287,6 @@ function InfoProject() {
               handlePhaseChange={handlePhaseChange}
               handleAddKeys={handleAddKeys} />
           </div>
-
-
-          <button onClick={addObjetives}>Agregar</button>
-      
-        <ModalKeyUpdates newDescription={handletDescription}/>
-        <ProjectDetails project={project}/>
 
         </div>
       ) : (
